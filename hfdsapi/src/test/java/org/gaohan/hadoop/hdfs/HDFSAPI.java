@@ -13,5 +13,7 @@ public class HDFSAPI {
         Configuration configuration = new Configuration();
         FileSystem fileSystem = FileSystem.get(configuration);
 
+        System.out.println("hello");
+
     }
 }
