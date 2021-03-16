@@ -1,0 +1,3 @@
+monitor{thing='蜡烛', num=8}
+monitor{thing='骰子', num=5}
+monitor{thing='手铐', num=4}

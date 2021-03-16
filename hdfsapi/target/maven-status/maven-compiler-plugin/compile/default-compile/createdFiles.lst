@@ -1,0 +1,16 @@
+com\gaohan\hadoop\hdfs\wc\HDFSMapper.class
+com\gaohan\hadoop\mr\wc\WordCountDriver.class
+com\gaohan\hadoop\mr\wc\WordCountMapper.class
+com\gaohan\hadoop\hdfs\wc\Constants.class
+com\gaohan\hadoop\mr\wc\WordCountDriverV2.class
+com\gaohan\hadoop\hdfs\wc\WordCountMapper.class
+com\gaohan\hadoop\utils\FileUtils.class
+com\gaohan\hadoop\hdfs\wc\HDFSWCApp02.class
+com\gaohan\hadoop\hdfs\wc\HDFSWCApp01.class
+com\gaohan\hadoop\mr\wc\WordCountReducer.class
+com\gaohan\hadoop\hdfs\wc\HDFSContext.class
+com\gaohan\hadoop\mr\ser\AccessReducer.class
+com\gaohan\hadoop\hdfs\wc\ParamsUtil.class
+com\gaohan\hadoop\mr\ser\AccessMapper.class
+com\gaohan\hadoop\mr\ser\AccessDriver.class
+com\gaohan\hadoop\mr\ser\Access.class
