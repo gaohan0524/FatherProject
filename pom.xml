@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>hfdsapi</module>
+        <module>hdfsapi</module>
         <module>zkapi</module>
     </modules>
 
