@@ -10,6 +10,7 @@
     <version>1.0</version>
     <modules>
         <module>hfdsapi</module>
+        <module>zkapi</module>
     </modules>
 
     <properties>

@@ -9,8 +9,5 @@
         <module name="zkapi" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="hfdsapi" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
