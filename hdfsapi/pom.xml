@@ -11,18 +11,10 @@
 
     <artifactId>hdfsapi</artifactId>
 
-
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>cloudera</id>-->
-<!--            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>-->
-<!--        </repository>-->
-<!--    </repositories>-->
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-client -->

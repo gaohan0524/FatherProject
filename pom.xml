@@ -45,14 +45,6 @@
         </repository>
     </repositories>
 
-    <dependencies>
-
-
-
-
-
-    </dependencies>
-
     <dependencyManagement>
         <dependencies>
             <!-- JDBC -->
