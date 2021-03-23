@@ -48,6 +48,7 @@ object ContinuousLogin {
 			})
 		})
 
+		// 获得所有连续登录区间的天数
 		val continuousResult = sortedRDD.map(x => ((x._1, x._2._2), x._2._1))
 				.groupByKey()
 				.mapValues(x => {
@@ -71,7 +72,7 @@ object ContinuousLogin {
 		//(pk,CompactBuffer(3, 4, 2))
 		groupedContinuousResult.foreach(println)
 
-
+		// 获得每个name的最大连续登录天数
 		val maxContinuousResult = groupedContinuousResult.map(x => {
 			val name = x._1
 			val maxContinuousDays = x._2.toList.sortWith(_ > _)
