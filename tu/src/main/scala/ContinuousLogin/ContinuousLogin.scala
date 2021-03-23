@@ -30,7 +30,7 @@ object ContinuousLogin {
 		val groupedRDD = rdd.groupByKey()
 
 		// 组内排序
-		val sortedRDD = groupedRDD.flatMapValues(x => {
+		val sortedRDD: RDD[(String, (String, String))] = groupedRDD.flatMapValues(x => {
 			val sorted = x.toSet.toList.sorted
 
 			// 定义一个日期工具类
@@ -48,13 +48,28 @@ object ContinuousLogin {
 			})
 		})
 
+		//(ruoze,(20210730,20210730))
+		//(ruoze,(20210731,20210730))
+		//(ruoze,(20210801,20210730))
+		//(ruoze,(20210804,20210801))
+		//(ruoze,(20210806,20210802))
+		//(pk,(20210801,20210801))
+		//(pk,(20210802,20210801))
+		//(pk,(20210803,20210801))
+		//(pk,(20210804,20210801))
+		//(pk,(20210806,20210802))
+		//(pk,(20210807,20210802))
+		//(pk,(20210808,20210802))
+		//(pk,(20210811,20210804))
+		//(pk,(20210812,20210804))
+		sortedRDD.foreach(println)
+
 		// 获得所有连续登录区间的天数
 		val continuousResult = sortedRDD.map(x => ((x._1, x._2._2), x._2._1))
 				.groupByKey()
 				.mapValues(x => {
-					val list = x.toList.sorted
-					val times = list.size
-					times
+					val days = x.toList.size
+					days
 				})
 				.map(x => (x._1._1, x._2))
 
