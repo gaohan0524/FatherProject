@@ -12,6 +12,7 @@
         <module>hdfsapi</module>
         <module>zkapi</module>
         <module>sparkcore</module>
+        <module>tu</module>
     </modules>
 
     <properties>
