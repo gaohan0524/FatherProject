@@ -14,22 +14,21 @@ object ContinuousLogin {
 
 	def main(args: Array[String]): Unit = {
 
-		val sparkConf: SparkConf = new SparkConf().setMaster("local[4]").setAppName("RewrittenAsRDD")
+		val sparkConf: SparkConf = new SparkConf().setMaster("local[4]").setAppName("ContinuousLogin")
 		val sc = new SparkContext(sparkConf)
 
 		// 读取输入文件，获得包含所有数据的RDD
-		val lines: RDD[String] = sc.textFile("tu/input/continuous_login_info.txt")
-
-		val rdd = lines.map(x => {
-			val name = x.split(",")(0)
-			val date = x.split(",")(1)
-			(name, date)
-		})
+		val rdd = sc.textFile("tu/input/continuous_login_info.txt").map {
+			lines =>
+				val name = lines.split(",")(0)
+				val date = lines.split(",")(1)
+				(name, date)
+		}
 
 		// 根据name分组，将同一个name的数据分到同一个组内
 		val groupedRDD = rdd.groupByKey()
 
-		// 组内排序
+		// 组内排序，然后通过递增的索引获得所有连续登录的区间
 		val sortedRDD: RDD[(String, (String, String))] = groupedRDD.flatMapValues(x => {
 			val sorted = x.toSet.toList.sorted
 
@@ -42,9 +41,10 @@ object ContinuousLogin {
 				val date = dateFormat.parse(dateStr)
 				calendar.setTime(date)
 				calendar.add(Calendar.DATE, -index)
+				val dataBegin = dateFormat.format(calendar.getTime)
 				index +=1
 
-				(dateStr, dateFormat.format(calendar.getTime))
+				(dateStr, dataBegin)
 			})
 		})
 
@@ -62,40 +62,26 @@ object ContinuousLogin {
 		//(pk,(20210808,20210802))
 		//(pk,(20210811,20210804))
 		//(pk,(20210812,20210804))
-		sortedRDD.foreach(println)
+		// sortedRDD.foreach(println)
 
 		// 获得所有连续登录区间的天数
-		val continuousResult = sortedRDD.map(x => ((x._1, x._2._2), x._2._1))
+		val groupedContinuousResult = sortedRDD.map{ case (name, (dateStr, dateBegin)) => ((name, dateBegin), dateStr)}
 				.groupByKey()
-				.mapValues(x => {
-					val days = x.toList.size
-					days
+				.mapValues(dateStr => {
+					val continuousDays = dateStr.toList.size
+					continuousDays
 				})
-				.map(x => (x._1._1, x._2))
-
-		//(ruoze,3)
-		//(ruoze,1)
-		//(ruoze,1)
-		//(pk,3)
-		//(pk,2)
-		//(pk,4)
-		continuousResult.foreach(println)
-
-		// 聚合
-		val groupedContinuousResult = continuousResult.groupByKey()
-		//(ruoze,CompactBuffer(1, 3, 1))
-		//(pk,CompactBuffer(3, 4, 2))
-		groupedContinuousResult.foreach(println)
+				.map{case ((name, dateBegin), continuousDays) => (name, continuousDays)}
+				.groupByKey()
 
 		// 获得每个name的最大连续登录天数
-		val maxContinuousResult = groupedContinuousResult.map(x => {
-			val name = x._1
-			val maxContinuousDays = x._2.toList.sortWith(_ > _)
-			(name, maxContinuousDays.head)
-		})
+		val maxContinuousResult = groupedContinuousResult.map {
+			case (name, iterDays) =>
+				val maxContinuousDays = iterDays.toList.sortWith(_ > _).head
+				(name, maxContinuousDays)
+		}
 
-		//(ruoze,3)
-		//(pk,4)
+		println("每个用户连续最大登录天数为：")
 		maxContinuousResult.foreach(println)
 
 		sc.stop()
