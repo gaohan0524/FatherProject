@@ -1,4 +1,4 @@
-package ContinuousLogin
+package continuousLogin
 
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
@@ -14,7 +14,7 @@ object ContinuousLogin {
 
 	def main(args: Array[String]): Unit = {
 
-		val sparkConf: SparkConf = new SparkConf().setMaster("local[4]").setAppName("ContinuousLogin")
+		val sparkConf: SparkConf = new SparkConf().setMaster("local[4]").setAppName("continuousLogin")
 		val sc = new SparkContext(sparkConf)
 
 		// 读取输入文件，获得包含所有数据的RDD
@@ -47,22 +47,6 @@ object ContinuousLogin {
 				(dateStr, dataBegin)
 			})
 		})
-
-		//(ruoze,(20210730,20210730))
-		//(ruoze,(20210731,20210730))
-		//(ruoze,(20210801,20210730))
-		//(ruoze,(20210804,20210801))
-		//(ruoze,(20210806,20210802))
-		//(pk,(20210801,20210801))
-		//(pk,(20210802,20210801))
-		//(pk,(20210803,20210801))
-		//(pk,(20210804,20210801))
-		//(pk,(20210806,20210802))
-		//(pk,(20210807,20210802))
-		//(pk,(20210808,20210802))
-		//(pk,(20210811,20210804))
-		//(pk,(20210812,20210804))
-		// sortedRDD.foreach(println)
 
 		// 获得所有连续登录区间的天数
 		val groupedContinuousResult = sortedRDD.map{ case (name, (dateStr, dateBegin)) => ((name, dateBegin), dateStr)}

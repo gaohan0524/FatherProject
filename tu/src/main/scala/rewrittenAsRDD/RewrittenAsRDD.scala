@@ -1,4 +1,4 @@
-package RewrittenAsRDD
+package rewrittenAsRDD
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
@@ -10,7 +10,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 object RewrittenAsRDD {
 
 	def main(args: Array[String]): Unit = {
-		val sparkConf: SparkConf = new SparkConf().setMaster("local[4]").setAppName("RewrittenAsRDD")
+		val sparkConf: SparkConf = new SparkConf().setMaster("local[4]").setAppName("rewrittenAsRDD")
 		val sc = new SparkContext(sparkConf)
 
 		// 读取输入文件，获得包含所有数据的RDD
