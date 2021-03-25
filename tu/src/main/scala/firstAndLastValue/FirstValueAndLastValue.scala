@@ -11,7 +11,7 @@ object FirstValueAndLastValue {
 
 	def main(args: Array[String]): Unit = {
 
-		val sparkConf: SparkConf = new SparkConf().setMaster("local[4]").setAppName("rewrittenAsRDD")
+		val sparkConf: SparkConf = new SparkConf().setMaster("local[4]").setAppName("FirstValueAndLastValue")
 		val sc = new SparkContext(sparkConf)
 
 		val RDD = sc.parallelize(List(
