@@ -55,7 +55,7 @@ object ContinuousLogin {
 					val continuousDays = dateStr.toList.size
 					continuousDays
 				})
-				.map{case ((name, dateBegin), continuousDays) => (name, continuousDays)}
+				.map{case ((name, _), continuousDays) => (name, continuousDays)}
 				.groupByKey()
 
 		// 获得每个name的最大连续登录天数
