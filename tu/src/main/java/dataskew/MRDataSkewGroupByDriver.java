@@ -2,7 +2,6 @@ package dataskew;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
@@ -70,12 +69,12 @@ public class MRDataSkewGroupByDriver {
         Logger logger = LoggerFactory.getLogger(MyMapper.class);
 
         @Override
-        protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        protected void map(LongWritable key, Text value, Context context) {
             String[] line = value.toString().split("\t");
             try {
                 String ip = line[1];
                 String trafficStr = line[3];
-                long traffic = StringUtils.isNoneBlank(trafficStr) ? Long.valueOf(trafficStr) : 0L;
+                long traffic = StringUtils.isNoneBlank(trafficStr) ? Long.parseLong(trafficStr) : 0L;
                 Access access = new Access(line[0], ip, line[2], traffic);
 
                 context.write(new Text(ip), access);
@@ -121,7 +120,6 @@ class Access implements Writable {
     private String ip;
     private String url;
     private long traffic;
-    private String provinceCity;
 
     @Override
     public void write(DataOutput out) throws IOException {
@@ -183,15 +181,5 @@ class Access implements Writable {
 
     public void setTraffic(long traffic) {
         this.traffic = traffic;
-    }
-
-}
-
-
-
-class FileUtils {
-
-    public static void deleteTarget(Configuration conf,String path) throws Exception{
-        FileSystem.get(conf).delete(new Path(path),true);
     }
 }
