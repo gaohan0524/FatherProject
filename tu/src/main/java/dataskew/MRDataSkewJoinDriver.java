@@ -52,6 +52,7 @@ public class MRDataSkewJoinDriver {
 
         Job job = new Job(conf, "TestBloomFiltering");
         job.setJarByClass(MRDataSkewJoinDriver.class);
+        // 设置Mapper.class
         job.setMapperClass(BloomFilteringMapper.class);
 
         job.setNumReduceTasks(0);
@@ -73,16 +74,13 @@ public class MRDataSkewJoinDriver {
 
     public static class BloomFilteringMapper extends Mapper<Object, Text, Access, NullWritable> {
 
-        private BloomFilter filter = new BloomFilter();
+        private final BloomFilter filter = new BloomFilter();
 
         /**
          * 通过缓存文件，获取 二进制数据 ，并封装 、添加到 布隆过滤器
-         * @param context
-         * @throws IOException
-         * @throws InterruptedException
          */
         @Override
-        protected void setup(Context context) throws IOException,InterruptedException {
+        protected void setup(Context context) {
             BufferedReader in = null;
             try {
                 // 从当前作业中获取要缓存的文件
@@ -123,7 +121,7 @@ public class MRDataSkewJoinDriver {
             String trafficStr = line[3];
             //脏数据处理
             long traffic = StringUtils.isNoneBlank(trafficStr)
-                    ? Long.valueOf(trafficStr.replace("ruoze","")) : 0L;
+                    ? Long.parseLong(trafficStr.replace("ruoze","")) : 0L;
 
             //根据IP 匹配 出：源数据 Access ， 并输出
             StringTokenizer tokenizer = new StringTokenizer(ip);
@@ -194,7 +192,7 @@ class TrainingBloomfilter {
         int nbHash = getOptimalK(numMembers, vectorSize);
 
         // create new Bloom filter
-        BloomFilter filter = new BloomFilter(vectorSize, nbHash,Hash.MURMUR_HASH);
+        BloomFilter filter = new BloomFilter(vectorSize, nbHash, Hash.MURMUR_HASH);
 
         // Open file for read
         System.out.println("Training Bloom filter of size " + vectorSize

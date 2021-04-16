@@ -53,7 +53,6 @@ public class MRDataSkewGroupByDriver {
 
         // 自定义分区 -- 将倾斜的key - 进行打散 [数据倾斜优化]
         job.setPartitionerClass(AccessPartitioner.class);
-//        job.setNumReduceTasks(1); // 数据倾斜优化点 - 不推荐
 
         // 6、设置输入和输出数据的路径
         FileInputFormat.setInputPaths(job, new Path(input));
@@ -96,7 +95,7 @@ public class MRDataSkewGroupByDriver {
 
             Access access = new Access("",ip.toString(),"",traffic);
 
-            context.write(ip,access);
+            context.write(ip, access);
         }
     }
 
