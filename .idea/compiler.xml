@@ -10,6 +10,7 @@
         <module name="tu" />
         <module name="sparkcore" />
         <module name="hdfsapi" />
+        <module name="hbase" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -18,7 +18,7 @@ public class DistributedLockApp implements Lock, Watcher {
 
     private static final String ZK_ADDRESS = "192.168.44.12:2181";
     private ZooKeeper zkClient = null;
-    private final String ROOT_LOCK = "/nativeLock";
+    private final String ROOT_LOCK = "/zkLock";
     private String WAIT_LOCK;
     private String CURRENT_LOCK;
 
@@ -40,7 +40,6 @@ public class DistributedLockApp implements Lock, Watcher {
 
     @Override
     public void lock() {
-
         if (this.tryLock()) {
             // 如果获取锁成功
             System.out.println(Thread.currentThread().getName() + "->" + CURRENT_LOCK + "-> 成功获取锁");

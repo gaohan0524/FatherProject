@@ -12,6 +12,7 @@
         <module>hdfsapi</module>
         <module>zkapi</module>
         <module>sparkcore</module>
+        <module>hbase</module>
         <module>tu</module>
     </modules>
 
@@ -34,8 +35,8 @@
         <spark.scala.version>2.11</spark.scala.version>
         <spark.version>2.4.6</spark.version>
         <flume.version>1.7.0</flume.version>
+        <hbase.version>1.2.0-cdh5.15.1</hbase.version>
     </properties>
-
     <repositories>
         <repository>
             <id>aliyun</id>
@@ -153,9 +154,19 @@
                 <scope>provided</scope>
             </dependency>
 
+            <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-server -->
+            <dependency>
+                <groupId>org.apache.hbase</groupId>
+                <artifactId>hbase-server</artifactId>
+                <version>${hbase.version}</version>
+            </dependency>
 
-
-
+            <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-client -->
+            <dependency>
+                <groupId>org.apache.hbase</groupId>
+                <artifactId>hbase-client</artifactId>
+                <version>${hbase.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
