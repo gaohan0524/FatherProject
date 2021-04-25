@@ -10,7 +10,7 @@ import org.apache.hadoop.mapred.JobConf
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
- * 20210418-20210425
+ * 20210418-20210425 作业一
  * 使用Spark Core API操作HBase数据：自己在HBase中创建一个emp表，使用RDD API的方式将数据存入到HBase表中，
  * 		然后再使用RDD API读取emp表中的数据
  * 	emp.empno emp.ename	emp.job	emp.mgr	emp.hiredate emp.sal emp.comm emp.deptno

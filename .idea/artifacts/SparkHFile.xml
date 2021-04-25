@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SparkHFile">
+    <output-path>$PROJECT_DIR$/out/artifacts/SparkHFile</output-path>
+    <root id="archive" name="SparkHFile.jar">
+      <element id="directory" name="hfile">
+        <element id="file-copy" path="$PROJECT_DIR$/tu/src/main/scala/sparkcore/SparkHFile.scala" />
+      </element>
+    </root>
+  </artifact>
+</component>

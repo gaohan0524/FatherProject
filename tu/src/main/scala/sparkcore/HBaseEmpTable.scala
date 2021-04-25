@@ -9,7 +9,8 @@ import org.apache.hadoop.mapred.JobConf
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
- *  20210418-20210425 HBase和Hive关联操作【以emp表为例】
+ *  20210418-20210425 作业三
+ *  HBase和Hive关联操作【以emp表为例】
  *  案例二:
  *  在HBase表中的数据，可以使用Hive SQL完成统计分析(deptno分组求每个组的人数)
  */
