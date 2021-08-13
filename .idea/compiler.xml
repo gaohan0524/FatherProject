@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="zkapi" />
         <module name="tu" />
+        <module name="sparksql" />
         <module name="sparkcore" />
         <module name="hdfsapi" />
         <module name="hbase" />

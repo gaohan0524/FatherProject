@@ -30,27 +30,5 @@ public class DistributedLockTest {
             }
             System.in.read();
         }
-
-//        for (int j = 0; j < 10; j++) {
-//
-//            CountDownLatch countDownLatch = new CountDownLatch(10);
-//            for (int i = 1; i <= 10; i++) {
-//                new Thread(() -> {
-//                    try {
-//                        countDownLatch.await();
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    //  DistributedLock lock= new DistributedLock();
-//                    // lock.lock();
-//                    System.out.println(Thread.currentThread().getName() + "卖出第" + ALL-- + "张票!");
-//                    //  lock.unlock();
-//                }, "售票员<" + i + ">").start();
-//                countDownLatch.countDown();
-//            }
-//            Thread.sleep(10000);
-//            ALL=10;
-//            System.out.println("========================");
-//        }
     }
 }

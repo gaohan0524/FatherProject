@@ -14,6 +14,7 @@
         <module>sparkcore</module>
         <module>hbase</module>
         <module>tu</module>
+        <module>sparksql</module>
     </modules>
 
     <properties>

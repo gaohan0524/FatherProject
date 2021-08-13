@@ -53,7 +53,7 @@ public class DistributedLockApp implements Lock, Watcher {
         }
     }
 
-    private boolean waitForLock(String prev) throws Exception{
+    private void waitForLock(String prev) throws Exception{
 
         // 监听当前节点的前一个节点
         Stat stat = zkClient.exists(prev, true);
@@ -64,12 +64,11 @@ public class DistributedLockApp implements Lock, Watcher {
             countDownLatch.await();
             System.out.println(Thread.currentThread().getName()+"-> 成功获得锁");
         }
-        return true;
     }
 
 
     @Override
-    public void lockInterruptibly() throws InterruptedException {
+    public void lockInterruptibly() {
 
     }
 
@@ -107,7 +106,7 @@ public class DistributedLockApp implements Lock, Watcher {
     }
 
     @Override
-    public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
+    public boolean tryLock(long time, TimeUnit unit) {
         return false;
     }
 
